@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Школа</string>
+    <string name="Math">Математика</string>
+    <string name="Russian">Русский язык</string>
+    <string name="History">История</string>
+    <string name="English">Английский язык</string>
+    <string name="Physic">Физика</string>
+    <string name="ElRussian">Эл. Русский язык</string>
+    <string name="MyRussian">Родной язык</string>
+    <string name="Astronomy">Астрономия</string>
+    <string name="CS">Информатика</string>
+    <string name="SS">Обществознание</string>
+    <string name="ElMath">Эл. Математика</string>
+    <string name="OBJ">ОБЖ</string>
+    <string name="PE">Физ-ра</string>
+    <string name="Literature">Литература</string>
+    <string name="Geography">География</string>
+    <string name="Chemistry">Химия</string>
+    <string name="HourOfClass">Классный час</string>
+    <string name="Biology">Биология</string>
+    <string name="ElPhysic">Эл. Физика</string>
+</resources>
