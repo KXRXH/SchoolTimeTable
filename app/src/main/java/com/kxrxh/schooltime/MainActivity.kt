@@ -7,9 +7,6 @@ import android.icu.text.SimpleDateFormat
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextWatcher
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kxrxh.schooltime.adapter.ItemAdapter
 import com.kxrxh.schooltime.model.LessonClass
 import com.kxrxh.schooltime.model.Time
-import java.lang.Math.abs
 import java.util.*
 import kotlin.system.exitProcess
-import android.text.Editable
 
 
 class MainActivity : AppCompatActivity() {
@@ -146,7 +141,22 @@ class MainActivity : AppCompatActivity() {
                         Time(calendar[Calendar.HOUR_OF_DAY], calendar[Calendar.MINUTE]),
                         lastLessonStart
                     )
-                    if (diff in 0..39) {
+                    /* Checking is the lesson a @class-hour@ */
+                    if (getCurrentDay() == "Monday" && i == 5) {
+                        if (diff in 0..14) {
+                            date = sdf.parse(dataset[i].end)
+                            lastLessonStart = Time(date.hours, date.minutes)
+
+                            diff = getDiffOfTimes(
+                                Time(calendar[Calendar.HOUR_OF_DAY], calendar[Calendar.MINUTE]),
+                                lastLessonStart
+                            )
+                            curActView.text = "Сейчас идёт ${i + 1} урок"
+                            currLessonView.text = resources.getString(dataset[i].lessonId)
+                            timerView.text = "Оставшееся время\n${kotlin.math.abs(diff)} мин."
+                            return true
+                        }
+                    } else if (diff in 0..39) {
                         date = sdf.parse(dataset[i].end)
                         lastLessonStart = Time(date.hours, date.minutes)
 
@@ -162,6 +172,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        /* Checking last time of @brake@ */
         for (i in dataset.indices) {
             date = sdf.parse(dataset[i].end)
             val prevLessonStart = Time(date.hours, date.minutes)
